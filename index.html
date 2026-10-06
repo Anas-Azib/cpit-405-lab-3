@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPIT-405 Lab 3</title>
+
+  <!-- External CSS: general page styling -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Embedded CSS: Task 1, using the .image-preview class and a descendant selector -->
+  <style>
+    .image-preview {
+      background-color: #e2e2e2;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .image-preview img {
+      width: 160px;
+      background-color: white;
+      border-width: 30px;
+      border-style: solid;
+      border-top-color: skyblue;
+      border-right-color: lightpink;
+      border-bottom-color: lightgreen;
+      border-left-color: #ffefd5;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Lab 3: CSS Structure and Properties</h1>
+    <p>Anas Ibrahim Azib &middot; CPIT-405 Internet Applications</p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Task 1: Image Preview</h2>
+      <p>The <code>&lt;img&gt;</code> inside the <code>.image-preview</code> div is selected with the descendant selector <code>.image-preview img</code> and given a 30px border with a different color on each side.</p>
+
+      <div class="image-preview">
+        <img src="https://cpit405.gitlab.io/images/KAU_logo.png" alt="King Abdulaziz University logo">
+      </div>
+
+      <h3>CSS code</h3>
+<pre><code>.image-preview img {
+  width: 160px;
+  background-color: white;
+  border-width: 30px;
+  border-style: solid;
+  border-top-color: skyblue;
+  border-right-color: lightpink;
+  border-bottom-color: lightgreen;
+  border-left-color: #ffefd5;
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Task 2: Selectors and Priority</h2>
+      <p>Given code:</p>
+<pre><code>&lt;div id="header"&gt;
+  &lt;span class="myclass1"&gt;Every&lt;/span&gt;
+  &lt;span class="myclass2"&gt;one can&lt;/span&gt;
+  &lt;span class="myclass3"&gt;success.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;p&gt; One machine can do the work of fifty ordinary men.
+  &lt;span class="myclass4"&gt;No machine can do the work of one extraordinary man.&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;style&gt;
+   p &gt; span { color: red; }
+   #header span { color: pink; }
+   span { color: green; }
+   #header *:last-child { color: orange; }
+   #header span:first-child:hover { color: blue; }
+&lt;/style&gt;</code></pre>
+
+      <p>Live result (hover over the words to check the answers):</p>
+      <iframe src="demo.html" title="Live result of the given code"></iframe>
+
+      <h3>Answer</h3>
+      <!-- Inline CSS: each swatch color is set with the style attribute -->
+      <table>
+        <tr>
+          <th></th>
+          <th>color</th>
+          <th>color when mouse over</th>
+        </tr>
+        <tr>
+          <td>span.myclass1</td>
+          <td><span class="swatch" style="background-color: pink;"></span>pink</td>
+          <td><span class="swatch" style="background-color: blue;"></span>blue</td>
+        </tr>
+        <tr>
+          <td>span.myclass2</td>
+          <td><span class="swatch" style="background-color: pink;"></span>pink</td>
+          <td><span class="swatch" style="background-color: pink;"></span>pink</td>
+        </tr>
+        <tr>
+          <td>span.myclass3</td>
+          <td><span class="swatch" style="background-color: orange;"></span>orange</td>
+          <td><span class="swatch" style="background-color: orange;"></span>orange</td>
+        </tr>
+        <tr>
+          <td>span.myclass4</td>
+          <td><span class="swatch" style="background-color: red;"></span>red</td>
+          <td><span class="swatch" style="background-color: red;"></span>red</td>
+        </tr>
+      </table>
+
+      <h3>Explanation</h3>
+      <ul>
+        <li><strong>myclass1:</strong> <code>#header span</code> (1,0,1) beats <code>span</code> (0,0,1), so it is pink. It is the first child, so on hover <code>#header span:first-child:hover</code> (1,2,1) wins and it turns blue.</li>
+        <li><strong>myclass2:</strong> it is neither the first nor the last child, so only <code>#header span</code> applies. It stays pink, even on hover.</li>
+        <li><strong>myclass3:</strong> it is the last child, so <code>#header *:last-child</code> (1,1,0) beats <code>#header span</code> (1,0,1) and it is orange. The hover rule needs <code>:first-child</code>, so it stays orange.</li>
+        <li><strong>myclass4:</strong> it is outside <code>#header</code> and a direct child of <code>&lt;p&gt;</code>, so <code>p &gt; span</code> (0,0,2) beats <code>span</code> (0,0,1). It is red, with no hover change.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    CPIT-405 Internet Applications &middot; King Abdulaziz University
+    &middot; <a href="https://cpit405.gitlab.io/labs/lab-3/">Lab 3 instructions</a>
+  </footer>
+
+</body>
+</html>
